@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"github.com/wantedly/apig/command"
+	"github.com/vharish836/apig/command"
 )
 
+// Commands ...
 func Commands(meta *command.Meta) map[string]cli.CommandFactory {
 	return map[string]cli.CommandFactory{
 		"gen": func() (cli.Command, error) {

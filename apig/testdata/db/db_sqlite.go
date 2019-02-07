@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/wantedly/api-server/models"
+	"github.com/vharish836/api-server/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -14,6 +14,7 @@ import (
 	"github.com/serenize/snaker"
 )
 
+// Connect ...
 func Connect() *gorm.DB {
 	dir := filepath.Dir("db/database.db")
 	db, err := gorm.Open("sqlite3", dir+"/database.db")
@@ -36,10 +37,12 @@ func Connect() *gorm.DB {
 	return db
 }
 
+// DBInstance ...
 func DBInstance(c *gin.Context) *gorm.DB {
 	return c.MustGet("DB").(*gorm.DB)
 }
 
+// SetPreloads ...
 func (self *Parameter) SetPreloads(db *gorm.DB) *gorm.DB {
 	if self.Preloads == "" {
 		return db

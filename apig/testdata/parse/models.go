@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// User ...
 type User struct {
 	ID        uint       `gorm:"primary_key;AUTO_INCREMENT" json:"id,omitempty" form:"id"`
 	Name      string     `json:"name,omitempty" form:"name"`
@@ -11,6 +12,7 @@ type User struct {
 	UpdatedAt *time.Time
 }
 
+// Job ...
 type Job struct {
 	ID          uint       `gorm:"primary_key;AUTO_INCREMENT" json:"id,omitempty" form:"id"`
 	Name        string     `json:"name,omitempty" form:"name"`

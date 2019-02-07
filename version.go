@@ -1,6 +1,8 @@
 package main
 
-const Name string = "apig"
+// Name ...
+const Name string = "apig" 
+// Version ...
 const Version string = "0.1.0"
 
 // GitCommit describes latest commit hash.

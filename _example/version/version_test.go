@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TestAcceptHeader ...
 func TestAcceptHeader(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/", nil)
 	req.Header.Add("Accept", "application/json;version= 1.0.0 ; more information; more information")
@@ -19,6 +20,7 @@ func TestAcceptHeader(t *testing.T) {
 	}
 }
 
+// TestEmptyAcceptHeader ...
 func TestEmptyAcceptHeader(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/", nil)
 	req.Header.Add("Accept", "application/json; more information; more information")
@@ -31,6 +33,7 @@ func TestEmptyAcceptHeader(t *testing.T) {
 	}
 }
 
+// TestUndefinedAcceptHeader ...
 func TestUndefinedAcceptHeader(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/", nil)
 	c := &gin.Context{
@@ -42,6 +45,7 @@ func TestUndefinedAcceptHeader(t *testing.T) {
 	}
 }
 
+// TestQuery ...
 func TestQuery(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/?v=1.0.1", nil)
 	req.Header.Add("Accept", "application/json;version= 1.0.0 ; more information; more information")
@@ -54,6 +58,7 @@ func TestQuery(t *testing.T) {
 	}
 }
 
+// TestRange ...
 func TestRange(t *testing.T) {
 
 	if Range("1.2.3", "<", "0.9") {

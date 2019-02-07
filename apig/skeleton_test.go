@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// TestGenerateSkeleton ...
 func TestGenerateSkeleton(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "copyStaticFiles")
 	if err != nil {

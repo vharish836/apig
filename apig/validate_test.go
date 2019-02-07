@@ -2,6 +2,7 @@ package apig
 
 import "testing"
 
+// TestValidateForeignKey ...
 func TestValidateForeignKey(t *testing.T) {
 	model := &Model{
 		Name: "User",
@@ -33,7 +34,7 @@ func TestValidateForeignKey(t *testing.T) {
 	if result != true {
 		t.Fatalf("Incorrect result. expected: true, actual: %v", result)
 	}
-  
+
 	result = validateForeignKey(model.Fields, "Nation")
 	if result != false {
 		t.Fatalf("Incorrect result. expected: false, actual: %v", result)

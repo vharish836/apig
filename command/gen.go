@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/wantedly/apig/apig"
-	"github.com/wantedly/apig/util"
+	"github.com/vharish836/apig/apig"
+	"github.com/vharish836/apig/util"
 )
 
 const (
@@ -16,12 +16,14 @@ const (
 	targetFile = "main.go"
 )
 
+// GenCommand ...
 type GenCommand struct {
 	Meta
 
 	all bool
 }
 
+// Run ...
 func (c *GenCommand) Run(args []string) int {
 	wd, err := os.Getwd()
 	if err != nil {
@@ -54,10 +56,12 @@ func (c *GenCommand) parseArgs(args []string) error {
 	return nil
 }
 
+// Synopsis ...
 func (c *GenCommand) Synopsis() string {
 	return "Generate controllers based on models"
 }
 
+// Help ...
 func (c *GenCommand) Help() string {
 	helpText := `
 Usage: apig [options] gen

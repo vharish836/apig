@@ -10,7 +10,7 @@ Create a new {{ toOriginalCase .Model.Name }}
 + Request {{ toOriginalCase .Model.Name }} (application/json; charset=utf-8)
     + Headers
 
-            Accept: application/vnd.{{ .User }}+json
+            Accept: application/json
     + Attributes
 {{ range (requestParams .Model.Fields) }}
         + {{ .JSONName }}{{ if (apibDefaultValue .) ne "" }}: {{ apibDefaultValue . }}{{ end }} ({{ apibType . }}){{ end }}
@@ -25,7 +25,7 @@ Returns {{ article (toOriginalCase .Model.Name) }} list.
 + Request (application/json; charset=utf-8)
     + Headers
 
-            Accept: application/vnd.{{ .User }}+json
+            Accept: application/json
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (array, fixed)
@@ -47,7 +47,7 @@ Returns {{ article (toOriginalCase .Model.Name) }}.
 + Request (application/json; charset=utf-8)
     + Headers
 
-            Accept: application/vnd.{{ .User }}+json
+            Accept: application/json
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes ({{ toSnakeCase .Model.Name }}, fixed)
@@ -59,7 +59,7 @@ Update {{ article (toOriginalCase .Model.Name) }}.
 + Request {{ toSnakeCase .Model.Name }} (application/json; charset=utf-8)
     + Headers
 
-            Accept: application/vnd.{{ .User }}+json
+            Accept: application/json
     + Attributes
 {{ range (requestParams .Model.Fields) }}
         + {{ .JSONName }}{{ if (apibDefaultValue .) ne "" }}: {{ apibDefaultValue . }}{{ end }} ({{ apibType . }}){{ end }}
@@ -74,7 +74,7 @@ Delete {{ article (toOriginalCase .Model.Name) }}.
 + Request (application/json; charset=utf-8)
     + Headers
 
-            Accept: application/vnd.{{ .User }}+json
+            Accept: application/json
 
 + Response 204
 

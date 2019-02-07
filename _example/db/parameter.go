@@ -13,6 +13,7 @@ const (
 	defaultOrder = "desc"
 )
 
+// Parameter ...
 type Parameter struct {
 	Filters  map[string]string
 	Preloads string
@@ -24,6 +25,7 @@ type Parameter struct {
 	IsLastID bool
 }
 
+// NewParameter ...
 func NewParameter(c *gin.Context, model interface{}) (*Parameter, error) {
 	parameter := &Parameter{}
 

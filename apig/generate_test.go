@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/wantedly/apig/msg"
+	"github.com/vharish836/apig/msg"
 )
 
 var userModel = &Model{
@@ -45,12 +45,11 @@ var userModel = &Model{
 }
 
 var detail = &Detail{
-	VCS:       "github.com",
-	User:      "wantedly",
+	Module:    "testmodule",
 	Project:   "api-server",
 	Model:     userModel,
 	Models:    []*Model{userModel},
-	ImportDir: "github.com/wantedly/api-server",
+	ImportDir: "github.com/vharish836/api-server",
 	Namespace: "",
 }
 
@@ -69,6 +68,7 @@ func teardown() {
 	msg.Mute = false
 }
 
+// TestMain ...
 func TestMain(m *testing.M) {
 	setup()
 	code := m.Run()
@@ -76,6 +76,7 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
+// TestGenerateApibIndex ...
 func TestGenerateApibIndex(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateApibIndex")
 	if err != nil {
@@ -102,6 +103,7 @@ func TestGenerateApibIndex(t *testing.T) {
 	}
 }
 
+// TestGenerateApibModel ...
 func TestGenerateApibModel(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateApibModel")
 	if err != nil {
@@ -128,6 +130,7 @@ func TestGenerateApibModel(t *testing.T) {
 	}
 }
 
+// TestGenerateController ...
 func TestGenerateController(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateController")
 	if err != nil {
@@ -154,6 +157,7 @@ func TestGenerateController(t *testing.T) {
 	}
 }
 
+// TestGenerateRootController ...
 func TestGenerateRootController(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateRootController")
 	if err != nil {
@@ -180,6 +184,7 @@ func TestGenerateRootController(t *testing.T) {
 	}
 }
 
+// TestGenerateREADME ...
 func TestGenerateREADME(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateREADME")
 	if err != nil {
@@ -206,6 +211,7 @@ func TestGenerateREADME(t *testing.T) {
 	}
 }
 
+// TestGenerateRouter ...
 func TestGenerateRouter(t *testing.T) {
 	outDir, err := ioutil.TempDir("", "generateRouter")
 	if err != nil {
@@ -232,6 +238,7 @@ func TestGenerateRouter(t *testing.T) {
 	}
 }
 
+// TestGenerateDBSQLite ...
 func TestGenerateDBSQLite(t *testing.T) {
 	detail.Database = "sqlite"
 
@@ -260,6 +267,7 @@ func TestGenerateDBSQLite(t *testing.T) {
 	}
 }
 
+// TestGenerateDBPostgres ...
 func TestGenerateDBPostgres(t *testing.T) {
 	detail.Database = "postgres"
 
@@ -288,6 +296,7 @@ func TestGenerateDBPostgres(t *testing.T) {
 	}
 }
 
+// TestGenerateDBMysql ...
 func TestGenerateDBMysql(t *testing.T) {
 	detail.Database = "mysql"
 

@@ -28,6 +28,7 @@ func filterToMap(c *gin.Context, model interface{}) map[string]string {
 	return filters
 }
 
+// FilterFields ...
 func (self *Parameter) FilterFields(db *gorm.DB) *gorm.DB {
 	for k, v := range self.Filters {
 		if v != "" {
@@ -38,6 +39,7 @@ func (self *Parameter) FilterFields(db *gorm.DB) *gorm.DB {
 	return db
 }
 
+// GetRawFilterQuery ...
 func (self *Parameter) GetRawFilterQuery() string {
 	var s string
 

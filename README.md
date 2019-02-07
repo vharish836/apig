@@ -34,8 +34,8 @@ Go 1.6 or higher is required.
 After installing required version of Go, you can build and install `apig` by
 
 ```bash
-$ go get -d -u github.com/wantedly/apig
-$ cd $GOPATH/src/github.com/wantedly/apig
+$ go get -d -u github.com/vharish836/apig
+$ cd $GOPATH/src/github.com/vharish836/apig
 $ make
 $ make install
 ```
@@ -50,11 +50,11 @@ $ make install
 First, creating by `apig new` command.
 
 ```
-$ apig new -u wantedly apig-sample
+$ apig new -m github.com/vharish836/apiig-sample apig-sample
 ```
 
-generates Golang API server boilerplate under `$GOPATH/src/gihhub.com/wantedly/apig-sample`.
-apig supports two database engines; SQLite (`sqlite`) and PostgreSQL (`postgres`) and Mysql (`mysql`). You can specify this by `-d, -database` option.
+generates Golang API server boilerplate under `$PWD/apig-sample`.
+apig supports three database engines; SQLite (`sqlite`) and PostgreSQL (`postgres`) and Mysql (`mysql`). You can specify this by `-d, -database` option.
 
 Available command line options of `apig new` command are:
 
@@ -62,8 +62,7 @@ Available command line options of `apig new` command are:
 |------|-----------|--------|-------|
 |`-d, -database`|Database engine||`sqlite`|
 |`-n, -namespace`|Namespace of API||(empty)|
-|`-u, -user`|Username||github username|
-|`--vcs`|VCS||`github.com`|
+|`-m, -module`|Module||Go module name|
 
 ### 2. Write model code
 

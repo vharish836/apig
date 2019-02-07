@@ -1,5 +1,6 @@
 package apig
 
+// AssociationNone ...
 const (
 	AssociationNone      = 0
 	AssociationBelongsTo = 1
@@ -7,11 +8,13 @@ const (
 	AssociationHasOne    = 3
 )
 
+// Model ...
 type Model struct {
 	Name   string
 	Fields []*Field
 }
 
+// AllPreloadAssocs ...
 func (m *Model) AllPreloadAssocs() []string {
 	result := []string{}
 
@@ -22,20 +25,25 @@ func (m *Model) AllPreloadAssocs() []string {
 	return result
 }
 
-type Models []*Model // implements Sort interface
+// Models ...
+type Models []*Model
 
+// Len ...
 func (m Models) Len() int {
 	return len(m)
 }
 
+// Less ...
 func (m Models) Less(i, j int) bool {
 	return m[i].Name < m[j].Name
 }
 
+// Swap ...
 func (m Models) Swap(i, j int) {
 	m[i], m[j] = m[j], m[i]
 }
 
+// Field ...
 type Field struct {
 	Name        string
 	JSONName    string
@@ -44,6 +52,7 @@ type Field struct {
 	Association *Association
 }
 
+// PreloadAssocs ...
 func (f *Field) PreloadAssocs() []string {
 	if f.Association == nil || f.Association.Type == AssociationNone {
 		return []string{}
@@ -64,14 +73,17 @@ func (f *Field) PreloadAssocs() []string {
 	return result
 }
 
+// IsAssociation ...
 func (f *Field) IsAssociation() bool {
 	return f.Association != nil && f.Association.Type != AssociationNone
 }
 
+// IsBelongsTo ...
 func (f *Field) IsBelongsTo() bool {
 	return f.Association != nil && f.Association.Type == AssociationBelongsTo
 }
 
+// Association ...
 type Association struct {
 	Type  int
 	Model *Model

@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// APIEndpoints ...
 func APIEndpoints(c *gin.Context) {
 	reqScheme := "http"
 

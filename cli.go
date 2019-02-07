@@ -5,9 +5,10 @@ import (
 	"os"
 
 	"github.com/mitchellh/cli"
-	"github.com/wantedly/apig/command"
+	"github.com/vharish836/apig/command"
 )
 
+// Run ...
 func Run(args []string) int {
 
 	// Meta-option for executables.
@@ -26,6 +27,7 @@ func Run(args []string) int {
 	return RunCustom(args, Commands(meta))
 }
 
+// RunCustom ...
 func RunCustom(args []string, commands map[string]cli.CommandFactory) int {
 
 	// Get the command line args. We shortcut "--version" and "-v" to

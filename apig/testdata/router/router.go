@@ -1,11 +1,12 @@
 package router
 
 import (
-	"github.com/wantedly/api-server/controllers"
+	"github.com/vharish836/api-server/controllers"
 
 	"github.com/gin-gonic/gin"
 )
 
+// Initialize ...
 func Initialize(r *gin.Engine) {
 	r.GET("/", controllers.APIEndpoints)
 

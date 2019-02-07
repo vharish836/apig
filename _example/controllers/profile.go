@@ -4,16 +4,17 @@ import (
 	"encoding/json"
 	"net/http"
 
-	dbpkg "github.com/wantedly/apig/_example/db"
-	"github.com/wantedly/apig/_example/helper"
-	"github.com/wantedly/apig/_example/models"
-	"github.com/wantedly/apig/_example/version"
+	dbpkg "github.com/vharish836/apig/_example/db"
+	"github.com/vharish836/apig/_example/helper"
+	"github.com/vharish836/apig/_example/models"
+	"github.com/vharish836/apig/_example/version"
 
 	"github.com/gin-gonic/gin"
 )
 
+// GetProfiles ...
 func GetProfiles(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -55,7 +56,7 @@ func GetProfiles(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -97,8 +98,9 @@ func GetProfiles(c *gin.Context) {
 	}
 }
 
+// GetProfile ...
 func GetProfile(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -129,7 +131,7 @@ func GetProfile(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -141,8 +143,9 @@ func GetProfile(c *gin.Context) {
 	}
 }
 
+// CreateProfile ...
 func CreateProfile(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -161,7 +164,7 @@ func CreateProfile(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -169,8 +172,9 @@ func CreateProfile(c *gin.Context) {
 	c.JSON(201, profile)
 }
 
+// UpdateProfile ...
 func UpdateProfile(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -196,7 +200,7 @@ func UpdateProfile(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -204,8 +208,9 @@ func UpdateProfile(c *gin.Context) {
 	c.JSON(200, profile)
 }
 
+// DeleteProfile ...
 func DeleteProfile(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -226,7 +231,7 @@ func DeleteProfile(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}

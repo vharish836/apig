@@ -2,6 +2,7 @@ package db
 
 import "testing"
 
+// TestConvertPrefixToQueryPlus ...
 func TestConvertPrefixToQueryPlus(t *testing.T) {
 	value := convertPrefixToQuery("id")
 
@@ -16,6 +17,7 @@ func TestConvertPrefixToQueryPlus(t *testing.T) {
 	}
 }
 
+// TestConvertPrefixToQueryMinus ...
 func TestConvertPrefixToQueryMinus(t *testing.T) {
 	value := convertPrefixToQuery("-id")
 

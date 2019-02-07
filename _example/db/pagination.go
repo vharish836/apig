@@ -8,6 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Paginate ...
 func (self *Parameter) Paginate(db *gorm.DB) (*gorm.DB, error) {
 	if self == nil {
 		return nil, errors.New("Parameter struct got nil.")
@@ -24,6 +25,7 @@ func (self *Parameter) Paginate(db *gorm.DB) (*gorm.DB, error) {
 	return db.Offset(self.Limit * (self.Page - 1)).Limit(self.Limit), nil
 }
 
+// SetHeaderLink ...
 func (self *Parameter) SetHeaderLink(c *gin.Context, index int) error {
 	if self == nil {
 		return errors.New("Parameter struct got nil.")

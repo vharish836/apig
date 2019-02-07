@@ -21,6 +21,7 @@ func fieldEquals(f1, f2 *Field) bool {
 	return true
 }
 
+// TestParseModel ...
 func TestParseModel(t *testing.T) {
 	path := filepath.Join("testdata", "parse", "models.go")
 
@@ -70,6 +71,7 @@ func TestParseModel(t *testing.T) {
 	}
 }
 
+// TestParseImport ...
 func TestParseImport(t *testing.T) {
 	path := filepath.Join("testdata", "parse", "router.go")
 
@@ -84,12 +86,13 @@ func TestParseImport(t *testing.T) {
 	}
 
 	importPath := importPaths[0]
-	expect := "github.com/wantedly/api-server/controllers"
+	expect := "github.com/vharish836/api-server/controllers"
 	if importPath != expect {
 		t.Fatalf("Incorrect import path. expected: %s, actual: %s", expect, importPath)
 	}
 }
 
+// TestParseNamespace ...
 func TestParseNamespace(t *testing.T) {
 	path := filepath.Join("testdata", "parse", "router.go")
 

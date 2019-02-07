@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// New ...
 func New(c *gin.Context) (string, error) {
 	ver := ""
 	header := c.Request.Header.Get("Accept")
@@ -33,6 +34,7 @@ func New(c *gin.Context) (string, error) {
 	return ver, nil
 }
 
+// Range ...
 func Range(left string, op string, right string) bool {
 	switch op {
 	case "<":

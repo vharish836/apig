@@ -7,8 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/tcnksm/go-gitconfig"
-	"github.com/wantedly/apig/apig"
+	"github.com/vharish836/apig/apig"
 )
 
 const (
@@ -16,37 +15,31 @@ const (
 	defaultVCS      = "github.com"
 )
 
+// NewCommand ...
 type NewCommand struct {
 	Meta
 
-	vcs       string
-	username  string
+	module    string
 	project   string
 	namespace string
 	database  string
 }
 
+// Run ...
 func (c *NewCommand) Run(args []string) int {
 	if err := c.parseArgs(args); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return 1
 	}
 
-	gopath := os.Getenv("GOPATH")
-	if gopath == "" {
-		fmt.Fprintln(os.Stderr, "Error: $GOPATH is not found")
-		return 1
-	}
-
-	return apig.Skeleton(gopath, c.vcs, c.username, c.project, c.namespace, c.database)
+	return apig.Skeleton(c.module, c.project, c.namespace, c.database)
 }
 
 func (c *NewCommand) parseArgs(args []string) error {
 	flag := flag.NewFlagSet("apig", flag.ContinueOnError)
 
-	flag.StringVar(&c.vcs, "vcs", defaultVCS, "VCS")
-	flag.StringVar(&c.username, "u", "", "Username")
-	flag.StringVar(&c.username, "user", "", "Username")
+	flag.StringVar(&c.module, "m", "", "Module name")
+	flag.StringVar(&c.module, "module", "", "Module name")
 	flag.StringVar(&c.namespace, "n", "", "Namespace of API")
 	flag.StringVar(&c.namespace, "namespace", "", "Namespace of API")
 	flag.StringVar(&c.database, "d", defaultDatabase, "Database engine [sqlite,postgres,mysql]")
@@ -60,27 +53,22 @@ func (c *NewCommand) parseArgs(args []string) error {
 	}
 
 	if c.project == "" {
-		return errors.New("Please specify project name.")
+		return errors.New("please specify project name")
 	}
 
-	if c.username == "" {
-		var err error
-		c.username, err = gitconfig.GithubUser()
-		if err != nil {
-			c.username, err = gitconfig.Username()
-			if err != nil || strings.Contains(c.username, " ") {
-				return errors.New("Cannot find github username in `~/.gitconfig` file.\n" +
-					"Please use -u option")
-			}
-		}
+	if c.module == "" {
+		return errors.New("please specify module name")
 	}
+
 	return nil
 }
 
+// Synopsis ...
 func (c *NewCommand) Synopsis() string {
 	return "Generate boilerplate"
 }
 
+// Help ...
 func (c *NewCommand) Help() string {
 	helpText := `
 Usage: apig new [options] PROJECTNAME
@@ -90,8 +78,7 @@ Usage: apig new [options] PROJECTNAME
 Options:
   -database=database, -d     Database engine [sqlite,postgres,mysql] (default: sqlite)
   -namespace=namepace, -n    Namespace of API (default: "" (blank string))
-  -user=name, -u             Username of VCS (default: username of github in .gitconfig)
-  -vcs=name                  Version controll system to use (default: github.com)
+  -module=name               Module name to use (default: "" (blank string))
 `
 	return strings.TrimSpace(helpText)
 }

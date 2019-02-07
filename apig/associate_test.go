@@ -2,6 +2,7 @@ package apig
 
 import "testing"
 
+// TestResolveAssociate ...
 func TestResolveAssociate(t *testing.T) {
 	user := &Model{
 		Name: "User",

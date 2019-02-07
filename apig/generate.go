@@ -7,6 +7,7 @@ import (
 	"go/format"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -16,8 +17,8 @@ import (
 
 	"github.com/gedex/inflector"
 	"github.com/serenize/snaker"
-	"github.com/wantedly/apig/msg"
-	"github.com/wantedly/apig/util"
+	"github.com/vharish836/apig/msg"
+	"github.com/vharish836/apig/util"
 )
 
 const (
@@ -451,8 +452,7 @@ func generateCommonFiles(detail *Detail, outDir string) error {
 			d := &Detail{
 				Model:     m,
 				ImportDir: detail.ImportDir,
-				VCS:       detail.VCS,
-				User:      detail.User,
+				Module:    detail.Module,
 				Project:   detail.Project,
 			}
 
@@ -571,6 +571,7 @@ func detectImportDir(targetPath string) (string, error) {
 	return importDir[0], nil
 }
 
+// Generate ...
 func Generate(outDir, modelDir, targetFile string, all bool) int {
 	outModelDir := filepath.Join(outDir, modelDir)
 
@@ -598,13 +599,8 @@ func Generate(outDir, modelDir, targetFile string, all bool) int {
 		return 1
 	}
 
-	dirs := strings.SplitN(importDir, "/", 3)
-
-	if len(dirs) < 3 {
-		fmt.Fprintln(os.Stderr, "Invalid import path: "+importDir)
-		return 1
-	}
-	vcs, user, project := dirs[0], dirs[1], dirs[2]
+	module := path.Dir(importDir)
+	project := path.Base(importDir)
 
 	namespace, err := parseNamespace(filepath.Join(outDir, "router", "router.go"))
 	if err != nil {
@@ -621,8 +617,7 @@ func Generate(outDir, modelDir, targetFile string, all bool) int {
 	detail := &Detail{
 		Models:    models,
 		ImportDir: importDir,
-		VCS:       vcs,
-		User:      user,
+		Module:    module,
 		Project:   project,
 		Namespace: namespace,
 		Database:  database,

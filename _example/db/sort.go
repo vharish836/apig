@@ -14,6 +14,7 @@ func convertPrefixToQuery(sort string) string {
 	}
 }
 
+// SortRecords ...
 func (self *Parameter) SortRecords(db *gorm.DB) *gorm.DB {
 	if self.Sort == "" {
 		return db

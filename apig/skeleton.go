@@ -12,8 +12,8 @@ import (
 	"sync"
 	"text/template"
 
-	"github.com/wantedly/apig/msg"
-	"github.com/wantedly/apig/util"
+	"github.com/vharish836/apig/msg"
+	"github.com/vharish836/apig/util"
 )
 
 var r = regexp.MustCompile(`_templates/skeleton/.*\.tmpl$`)
@@ -90,15 +90,20 @@ func generateSkeleton(detail *Detail, outDir string) error {
 	return nil
 }
 
-func Skeleton(gopath, vcs, username, project, namespace, database string) int {
+// Skeleton ...
+func Skeleton(module, project, namespace, database string) int {
 	detail := &Detail{
-		VCS:       vcs,
-		User:      username,
+		Module:    module,
 		Project:   project,
 		Namespace: namespace,
 		Database:  database,
 	}
-	outDir := filepath.Join(gopath, "src", detail.VCS, detail.User, detail.Project)
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return 1
+	}
+	outDir := filepath.Join(cwd, detail.Project)
 	if util.FileExists(outDir) {
 		fmt.Fprintf(os.Stderr, "%s is already exists", outDir)
 		return 1

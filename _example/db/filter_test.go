@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// User ...
 type User struct {
 	ID      uint   `json:"id,omitempty" form:"id"`
 	Name    string `json:"name,omitempty" form:"name"`
@@ -19,6 +20,7 @@ func contains(ss map[string]string, s string) bool {
 	return ok
 }
 
+// TestFilterToMap ...
 func TestFilterToMap(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/?q[id]=1,5,100&q[name]=hoge,fuga&q[unexisted_field]=null", nil)
 	c := &gin.Context{

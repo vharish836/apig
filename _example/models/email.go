@@ -1,5 +1,6 @@
 package models
 
+// Email ...
 type Email struct {
 	ID      uint   `gorm:"primary_key;AUTO_INCREMENT" json:"id" form:"id"`
 	Address string `json:"address" form:"address"`

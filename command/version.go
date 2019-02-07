@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// VersionCommand ...
 type VersionCommand struct {
 	Meta
 
@@ -13,6 +14,7 @@ type VersionCommand struct {
 	Revision string
 }
 
+// Run ...
 func (c *VersionCommand) Run(args []string) int {
 	var versionString bytes.Buffer
 
@@ -25,10 +27,12 @@ func (c *VersionCommand) Run(args []string) int {
 	return 0
 }
 
+// Synopsis ...
 func (c *VersionCommand) Synopsis() string {
 	return fmt.Sprintf("Print %s version and quit", c.Name)
 }
 
+// Help ...
 func (c *VersionCommand) Help() string {
 	return `
 Usage: apig version

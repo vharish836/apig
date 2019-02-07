@@ -4,16 +4,17 @@ import (
 	"encoding/json"
 	"net/http"
 
-	dbpkg "github.com/wantedly/api-server/db"
-	"github.com/wantedly/api-server/helper"
-	"github.com/wantedly/api-server/models"
-	"github.com/wantedly/api-server/version"
+	dbpkg "github.com/vharish836/api-server/db"
+	"github.com/vharish836/api-server/helper"
+	"github.com/vharish836/api-server/models"
+	"github.com/vharish836/api-server/version"
 
 	"github.com/gin-gonic/gin"
 )
 
+// GetUsers ...
 func GetUsers(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -55,7 +56,7 @@ func GetUsers(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -97,8 +98,9 @@ func GetUsers(c *gin.Context) {
 	}
 }
 
+// GetUser ...
 func GetUser(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -129,7 +131,7 @@ func GetUser(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -141,8 +143,9 @@ func GetUser(c *gin.Context) {
 	}
 }
 
+// CreateUser ...
 func CreateUser(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -161,7 +164,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -169,8 +172,9 @@ func CreateUser(c *gin.Context) {
 	c.JSON(201, user)
 }
 
+// UpdateUser ...
 func UpdateUser(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -196,7 +200,7 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}
@@ -204,8 +208,9 @@ func UpdateUser(c *gin.Context) {
 	c.JSON(200, user)
 }
 
+// DeleteUser ...
 func DeleteUser(c *gin.Context) {
-	ver, err := version.New(c)
+	ver, err := verpkg.New(c)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -226,7 +231,7 @@ func DeleteUser(c *gin.Context) {
 		return
 	}
 
-	if version.Range("1.0.0", "<=", ver) && version.Range(ver, "<", "2.0.0") {
+	if verpkg.Range("1.0.0", "<=", ver) && verpkg.Range(ver, "<", "2.0.0") {
 		// conditional branch by version.
 		// 1.0.0 <= this version < 2.0.0 !!
 	}

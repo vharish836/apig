@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// Profile ...
 type Profile struct {
 	ID       uint      `gorm:"primary_key;AUTO_INCREMENT" json:"id" form:"id"`
 	UserID   uint      `json:"user_id" form:"user_id"`

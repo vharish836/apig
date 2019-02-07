@@ -2,11 +2,12 @@ package apig
 
 import "testing"
 
+// TestFormatImportDir ...
 func TestFormatImportDir(t *testing.T) {
 	importPaths := generateImportSlice(
-		"github.com/wantedly/api-server/db",
-		"github.com/wantedly/api-server/models",
-		"github.com/wantedly/api-server/server",
+		"github.com/vharish836/api-server/db",
+		"github.com/vharish836/api-server/models",
+		"github.com/vharish836/api-server/server",
 		"fmt",
 	)
 
@@ -15,7 +16,7 @@ func TestFormatImportDir(t *testing.T) {
 		t.Fatalf("Number of import dir is incorrect. expected: 1, actual: %d", len(result))
 	}
 
-	expect := "github.com/wantedly/api-server"
+	expect := "github.com/vharish836/api-server"
 	if result[0] != expect {
 		t.Fatalf("Incorrect import dir. expected: %s, actual: %s", expect, result[0])
 	}

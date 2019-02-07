@@ -4,6 +4,7 @@ import (
 	"testing"
 )
 
+// User ...
 type User struct {
 	ID      uint     `json:"id" form:"id"`
 	Jobs    []*Job   `json:"jobs,omitempty" form:"jobs"`
@@ -11,6 +12,7 @@ type User struct {
 	Profile *Profile `json:"profile,omitempty" form:"profile"`
 }
 
+// Profile ...
 type Profile struct {
 	ID      uint  `json:"id" form:"id"`
 	UserID  uint  `json:"user_id" form:"user_id"`
@@ -18,6 +20,7 @@ type Profile struct {
 	Engaged bool  `json:"engaged" form:"engaged"`
 }
 
+// Job ...
 type Job struct {
 	ID     uint  `json:"id" form:"id"`
 	UserID uint  `json:"user_id" form:"user_id"`
@@ -25,6 +28,7 @@ type Job struct {
 	RoleCd uint  `json:"role_cd" form:"role_cd"`
 }
 
+// Company ...
 type Company struct {
 	ID           uint              `json:"id,omitempty" form:"id"`
 	Name         string            `json:"name,omitempty" form:"name"`
@@ -34,6 +38,7 @@ type Company struct {
 	User         *User             `json:"user,omitempty" form:"user"`
 }
 
+// TestQueryFields_Wildcard ...
 func TestQueryFields_Wildcard(t *testing.T) {
 	fields := map[string]interface{}{"*": nil}
 	result := QueryFields(User{}, fields)
@@ -44,6 +49,7 @@ func TestQueryFields_Wildcard(t *testing.T) {
 	}
 }
 
+// TestQueryFields_Primitive ...
 func TestQueryFields_Primitive(t *testing.T) {
 	fields := map[string]interface{}{"name": nil}
 	result := QueryFields(User{}, fields)
@@ -54,6 +60,7 @@ func TestQueryFields_Primitive(t *testing.T) {
 	}
 }
 
+// TestQueryFields_Multiple ...
 func TestQueryFields_Multiple(t *testing.T) {
 	fields := map[string]interface{}{"id": nil, "name": nil}
 	result := QueryFields(User{}, fields)
@@ -64,6 +71,7 @@ func TestQueryFields_Multiple(t *testing.T) {
 	}
 }
 
+// TestQueryFields_BelongsTo ...
 func TestQueryFields_BelongsTo(t *testing.T) {
 	fields := map[string]interface{}{"user": nil}
 	result := QueryFields(Profile{}, fields)
@@ -74,6 +82,7 @@ func TestQueryFields_BelongsTo(t *testing.T) {
 	}
 }
 
+// TestQueryFields_HasOne ...
 func TestQueryFields_HasOne(t *testing.T) {
 	fields := map[string]interface{}{"profile": nil}
 	result := QueryFields(User{}, fields)
@@ -84,6 +93,7 @@ func TestQueryFields_HasOne(t *testing.T) {
 	}
 }
 
+// TestQueryFields_HasMany ...
 func TestQueryFields_HasMany(t *testing.T) {
 	fields := map[string]interface{}{"jobs": nil}
 	result := QueryFields(User{}, fields)
@@ -94,6 +104,7 @@ func TestQueryFields_HasMany(t *testing.T) {
 	}
 }
 
+// TestParseFields_Wildcard ...
 func TestParseFields_Wildcard(t *testing.T) {
 	fields := "*"
 	result := ParseFields(fields)
@@ -107,6 +118,7 @@ func TestParseFields_Wildcard(t *testing.T) {
 	}
 }
 
+// TestParseFields_Flat ...
 func TestParseFields_Flat(t *testing.T) {
 	fields := "profile"
 	result := ParseFields(fields)
@@ -120,6 +132,7 @@ func TestParseFields_Flat(t *testing.T) {
 	}
 }
 
+// TestParseFields_Nested ...
 func TestParseFields_Nested(t *testing.T) {
 	fields := "profile.nation"
 	result := ParseFields(fields)
@@ -141,6 +154,7 @@ func TestParseFields_Nested(t *testing.T) {
 	}
 }
 
+// TestParseFields_NestedDeeply ...
 func TestParseFields_NestedDeeply(t *testing.T) {
 	fields := "profile.nation.name"
 	result := ParseFields(fields)
@@ -170,6 +184,7 @@ func TestParseFields_NestedDeeply(t *testing.T) {
 	}
 }
 
+// TestParseFields_MultipleFields ...
 func TestParseFields_MultipleFields(t *testing.T) {
 	fields := "profile.nation.name,emails"
 	result := ParseFields(fields)
@@ -207,6 +222,7 @@ func TestParseFields_MultipleFields(t *testing.T) {
 	}
 }
 
+// TestParseFields_Included ...
 func TestParseFields_Included(t *testing.T) {
 	fields := "profile.nation.name,profile"
 	result := ParseFields(fields)
@@ -234,6 +250,7 @@ var job = Job{
 	RoleCd: 1,
 }
 
+// TestFieldToMap_Wildcard ...
 func TestFieldToMap_Wildcard(t *testing.T) {
 	user := User{
 		ID:      1,
@@ -266,6 +283,7 @@ func TestFieldToMap_Wildcard(t *testing.T) {
 	}
 }
 
+// TestFieldToMap_OmitEmpty ...
 func TestFieldToMap_OmitEmpty(t *testing.T) {
 	user := User{
 		ID:      1,
@@ -296,6 +314,7 @@ func TestFieldToMap_OmitEmpty(t *testing.T) {
 	}
 }
 
+// TestFieldToMap_OmitEmptyWithField ...
 func TestFieldToMap_OmitEmptyWithField(t *testing.T) {
 	user := User{
 		ID:      1,
@@ -328,6 +347,7 @@ func TestFieldToMap_OmitEmptyWithField(t *testing.T) {
 	}
 }
 
+// TestFieldToMap_OmitEmptyAllTypes ...
 func TestFieldToMap_OmitEmptyAllTypes(t *testing.T) {
 	company := Company{
 		ID:           0,
@@ -354,6 +374,7 @@ func TestFieldToMap_OmitEmptyAllTypes(t *testing.T) {
 	}
 }
 
+// TestFieldToMap_SpecifyField ...
 func TestFieldToMap_SpecifyField(t *testing.T) {
 	user := User{
 		ID:      1,
@@ -385,6 +406,7 @@ func TestFieldToMap_SpecifyField(t *testing.T) {
 	}
 }
 
+// TestFieldToMap_NestedField ...
 func TestFieldToMap_NestedField(t *testing.T) {
 	user := User{
 		ID:      1,

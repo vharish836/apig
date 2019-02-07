@@ -2,6 +2,7 @@ package models
 
 import "database/sql"
 
+// Company ...
 type Company struct {
 	ID   uint           `gorm:"primary_key;AUTO_INCREMENT" json:"id" form:"id"`
 	Name string         `json:"name" form:"name"`

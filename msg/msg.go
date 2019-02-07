@@ -5,11 +5,13 @@ import (
 	"sync"
 )
 
+// Mute ...
 var (
 	Mute = false
 	m    sync.Mutex
 )
 
+// Printf ...
 func Printf(format string, a ...interface{}) {
 	if !Mute {
 		m.Lock()
@@ -18,6 +20,7 @@ func Printf(format string, a ...interface{}) {
 	}
 }
 
+// Println ...
 func Println(a ...interface{}) {
 	if !Mute {
 		m.Lock()

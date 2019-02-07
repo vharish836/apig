@@ -1,8 +1,8 @@
 package apig
 
+// Detail ...
 type Detail struct {
-	VCS       string
-	User      string
+	Module    string
 	Project   string
 	Namespace string
 	Models    Models

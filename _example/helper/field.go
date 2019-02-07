@@ -8,6 +8,7 @@ import (
 	"github.com/serenize/snaker"
 )
 
+// AssociationType ...
 type AssociationType int
 
 const (
@@ -37,6 +38,7 @@ func merge(m1, m2 map[string]interface{}) map[string]interface{} {
 	return result
 }
 
+// QueryFields ...
 func QueryFields(model interface{}, fields map[string]interface{}) string {
 	var jsonTag, jsonKey string
 
@@ -92,6 +94,7 @@ func QueryFields(model interface{}, fields map[string]interface{}) string {
 	return strings.Join(result, ",")
 }
 
+// ParseFields ...
 func ParseFields(fields string) map[string]interface{} {
 	result := make(map[string]interface{})
 
@@ -135,6 +138,7 @@ func isEmptyValue(v reflect.Value) bool {
 	return false
 }
 
+// FieldToMap ...
 func FieldToMap(model interface{}, fields map[string]interface{}) (map[string]interface{}, error) {
 	u := make(map[string]interface{})
 	ts, vs := reflect.TypeOf(model), reflect.ValueOf(model)
