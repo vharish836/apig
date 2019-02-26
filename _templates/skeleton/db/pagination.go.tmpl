@@ -8,24 +8,24 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func (self *Parameter) Paginate(db *gorm.DB) (*gorm.DB, error) {
-	if self == nil {
+func (p *Parameter) Paginate(db *gorm.DB) (*gorm.DB, error) {
+	if p == nil {
 		return nil, errors.New("Parameter struct got nil.")
 	}
 
-	if self.IsLastID {
-		if self.Order == "asc" {
-			return db.Where("id > ?", self.LastID).Limit(self.Limit).Order("id asc"), nil
+	if p.IsLastID {
+		if p.Order == "asc" {
+			return db.Where("id > ?", p.LastID).Limit(p.Limit).Order("id asc"), nil
 		}
 
-		return db.Where("id < ?", self.LastID).Limit(self.Limit).Order("id desc"), nil
+		return db.Where("id < ?", p.LastID).Limit(p.Limit).Order("id desc"), nil
 	}
 
-	return db.Offset(self.Limit * (self.Page - 1)).Limit(self.Limit), nil
+	return db.Offset(p.Limit * (p.Page - 1)).Limit(p.Limit), nil
 }
 
-func (self *Parameter) SetHeaderLink(c *gin.Context, index int) error {
-	if self == nil {
+func (p *Parameter) SetHeaderLink(c *gin.Context, index int) error {
+	if p == nil {
 		return errors.New("Parameter struct got nil.")
 	}
 
@@ -40,26 +40,26 @@ func (self *Parameter) SetHeaderLink(c *gin.Context, index int) error {
 		pretty = "&pretty"
 	}
 
-	if len(self.Filters) != 0 {
-		filters = self.GetRawFilterQuery()
+	if len(p.Filters) != 0 {
+		filters = p.GetRawFilterQuery()
 	}
 
-	if self.Preloads != "" {
-		preloads = fmt.Sprintf("&preloads=%v", self.Preloads)
+	if p.Preloads != "" {
+		preloads = fmt.Sprintf("&preloads=%v", p.Preloads)
 	}
 
-	if self.IsLastID {
-		c.Header("Link", fmt.Sprintf("<%s://%v%v?limit=%v%s%s&last_id=%v&order=%v%s>; rel=\"next\"", reqScheme, c.Request.Host, c.Request.URL.Path, self.Limit, filters, preloads, index, self.Order, pretty))
+	if p.IsLastID {
+		c.Header("Link", fmt.Sprintf("<%s://%v%v?limit=%v%s%s&last_id=%v&order=%v%s>; rel=\"next\"", reqScheme, c.Request.Host, c.Request.URL.Path, p.Limit, filters, preloads, index, p.Order, pretty))
 		return nil
 	}
 
-	if self.Page == 1 {
-		c.Header("Link", fmt.Sprintf("<%s://%v%v?limit=%v%s%s&page=%v%s>; rel=\"next\"", reqScheme, c.Request.Host, c.Request.URL.Path, self.Limit, filters, preloads, self.Page+1, pretty))
+	if p.Page == 1 {
+		c.Header("Link", fmt.Sprintf("<%s://%v%v?limit=%v%s%s&page=%v%s>; rel=\"next\"", reqScheme, c.Request.Host, c.Request.URL.Path, p.Limit, filters, preloads, p.Page+1, pretty))
 		return nil
 	}
 
 	c.Header("Link", fmt.Sprintf(
 		"<%s://%v%v?limit=%v%s%s&page=%v%s>; rel=\"next\",<%s://%v%v?limit=%v%s%s&page=%v%s>; rel=\"prev\"", reqScheme,
-		c.Request.Host, c.Request.URL.Path, self.Limit, filters, preloads, self.Page+1, pretty, reqScheme, c.Request.Host, c.Request.URL.Path, self.Limit, filters, preloads, self.Page-1, pretty))
+		c.Request.Host, c.Request.URL.Path, p.Limit, filters, preloads, p.Page+1, pretty, reqScheme, c.Request.Host, c.Request.URL.Path, p.Limit, filters, preloads, p.Page-1, pretty))
 	return nil
 }

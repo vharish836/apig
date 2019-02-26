@@ -20,7 +20,7 @@ func GetUsers(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.User{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -106,7 +106,7 @@ func GetUser(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.User{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -151,7 +151,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	user := models.User{}
 
 	if err := c.Bind(&user); err != nil {
@@ -180,7 +180,7 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	user := models.User{}
 
@@ -216,7 +216,7 @@ func DeleteUser(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	user := models.User{}
 

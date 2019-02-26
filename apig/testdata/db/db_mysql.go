@@ -40,8 +40,8 @@ func Connect() *gorm.DB {
 	return db
 }
 
-// DBInstance ...
-func DBInstance(c *gin.Context) *gorm.DB {
+// Instance ...
+func Instance(c *gin.Context) *gorm.DB {
 	return c.MustGet("DB").(*gorm.DB)
 }
 

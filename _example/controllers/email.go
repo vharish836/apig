@@ -20,7 +20,7 @@ func GetEmails(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Email{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -106,7 +106,7 @@ func GetEmail(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Email{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -151,7 +151,7 @@ func CreateEmail(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	email := models.Email{}
 
 	if err := c.Bind(&email); err != nil {
@@ -180,7 +180,7 @@ func UpdateEmail(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	email := models.Email{}
 
@@ -216,7 +216,7 @@ func DeleteEmail(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	email := models.Email{}
 

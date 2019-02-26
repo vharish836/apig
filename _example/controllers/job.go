@@ -20,7 +20,7 @@ func GetJobs(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Job{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -106,7 +106,7 @@ func GetJob(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Job{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -151,7 +151,7 @@ func CreateJob(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	job := models.Job{}
 
 	if err := c.Bind(&job); err != nil {
@@ -180,7 +180,7 @@ func UpdateJob(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	job := models.Job{}
 
@@ -216,7 +216,7 @@ func DeleteJob(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	job := models.Job{}
 

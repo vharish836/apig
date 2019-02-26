@@ -9,5 +9,4 @@ require (
 	github.com/onsi/ginkgo v1.7.0 // indirect
 	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/serenize/snaker v0.0.0-20160310080004-8824b61eca66
-	github.com/tcnksm/go-gitconfig v0.0.0-20150505151006-6411ba19847f
 )

@@ -28,8 +28,8 @@ func filterToMap(c *gin.Context, model interface{}) map[string]string {
 	return filters
 }
 
-func (self *Parameter) FilterFields(db *gorm.DB) *gorm.DB {
-	for k, v := range self.Filters {
+func (p *Parameter) FilterFields(db *gorm.DB) *gorm.DB {
+	for k, v := range p.Filters {
 		if v != "" {
 			db = db.Where(fmt.Sprintf("%s IN (?)", k), strings.Split(v, ","))
 		}
@@ -38,10 +38,10 @@ func (self *Parameter) FilterFields(db *gorm.DB) *gorm.DB {
 	return db
 }
 
-func (self *Parameter) GetRawFilterQuery() string {
+func (p *Parameter) GetRawFilterQuery() string {
 	var s string
 
-	for k, v := range self.Filters {
+	for k, v := range p.Filters {
 		if v != "" {
 			s += "&q[" + k + "]=" + v
 		}

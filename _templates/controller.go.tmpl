@@ -19,7 +19,7 @@ func Get{{ pluralize .Model.Name }}(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.{{ .Model.Name }}{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -104,7 +104,7 @@ func Get{{ .Model.Name }}(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.{{ .Model.Name }}{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -148,7 +148,7 @@ func Create{{ .Model.Name }}(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	{{ toLowerCamelCase .Model.Name }} := models.{{ .Model.Name }}{}
 
 	if err := c.Bind(&{{ toLowerCamelCase .Model.Name }}); err != nil {
@@ -176,7 +176,7 @@ func Update{{ .Model.Name }}(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	{{ toLowerCamelCase .Model.Name }} := models.{{ .Model.Name }}{}
 
@@ -211,7 +211,7 @@ func Delete{{ .Model.Name }}(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	{{ toLowerCamelCase .Model.Name }} := models.{{ .Model.Name }}{}
 

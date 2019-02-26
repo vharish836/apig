@@ -1,13 +1,20 @@
 package router
 
 import (
+	"fmt"
+	
 	"{{ .ImportDir }}/controllers"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
-func Initialize(r *gin.Engine) {
-	r.GET("/", controllers.APIEndpoints)
+func Initialize(r *gin.Engine, sfiles string) {
+	if sfiles != "" {
+		fmt.Printf("serving static files from %s\n", sfiles)
+		r.Use(static.Serve("/", static.LocalFile(sfiles, true)))
+	}
+	r.GET("/endpoints", controllers.APIEndpoints)
 
 	api := r.Group("{{ .Namespace }}")
 	{

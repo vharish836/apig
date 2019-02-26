@@ -20,7 +20,7 @@ func GetProfiles(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Profile{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -106,7 +106,7 @@ func GetProfile(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Profile{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -151,7 +151,7 @@ func CreateProfile(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	profile := models.Profile{}
 
 	if err := c.Bind(&profile); err != nil {
@@ -180,7 +180,7 @@ func UpdateProfile(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	profile := models.Profile{}
 
@@ -216,7 +216,7 @@ func DeleteProfile(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	profile := models.Profile{}
 

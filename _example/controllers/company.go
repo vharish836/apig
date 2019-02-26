@@ -20,7 +20,7 @@ func GetCompanies(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Company{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -106,7 +106,7 @@ func GetCompany(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	parameter, err := dbpkg.NewParameter(c, models.Company{})
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -151,7 +151,7 @@ func CreateCompany(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	company := models.Company{}
 
 	if err := c.Bind(&company); err != nil {
@@ -180,7 +180,7 @@ func UpdateCompany(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	company := models.Company{}
 
@@ -216,7 +216,7 @@ func DeleteCompany(c *gin.Context) {
 		return
 	}
 
-	db := dbpkg.DBInstance(c)
+	db := dbpkg.Instance(c)
 	id := c.Params.ByName("id")
 	company := models.Company{}
 

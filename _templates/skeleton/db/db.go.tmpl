@@ -13,23 +13,19 @@ import (
 	"github.com/serenize/snaker"
 )
 
-func Connect() *gorm.DB {
 {{ if (eq .Database "sqlite") -}}
+func Connect(am bool) *gorm.DB {
 	dir := filepath.Dir("db/database.db")
+	err := os.MkdirAll(dir, os.ModePerm)
+    if err != nil {
+        log.Fatalf("Failed to create directory for db: %s", err)
+    }
 	db, err := gorm.Open("sqlite3", dir+"/database.db")
 {{ else if (eq .Database "postgres") -}}
-	dbURL := os.Getenv("DATABASE_URL")
-	if dbURL == "" {
-		return nil
-	}
-
+func Connect(dbURL string, am bool) *gorm.DB {
 	db, err := gorm.Open("postgres", dbURL)
 {{ else if (eq .Database "mysql") -}}
-	dbURL := os.Getenv("DATABASE_URL")
-	if dbURL == "" {
-		return nil
-	}
-
+func Connect(dbURL string, am bool) *gorm.DB {
 	db, err := gorm.Open("mysql", dbURL)
 {{ end -}}
 	if err != nil {
@@ -45,16 +41,16 @@ func Connect() *gorm.DB {
 	return db
 }
 
-func DBInstance(c *gin.Context) *gorm.DB {
+func Instance(c *gin.Context) *gorm.DB {
 	return c.MustGet("DB").(*gorm.DB)
 }
 
-func (self *Parameter) SetPreloads(db *gorm.DB) *gorm.DB {
-	if self.Preloads == "" {
+func (p *Parameter) SetPreloads(db *gorm.DB) *gorm.DB {
+	if p.Preloads == "" {
 		return db
 	}
 
-	for _, preload := range strings.Split(self.Preloads, ",") {
+	for _, preload := range strings.Split(p.Preloads, ",") {
 		var a []string
 
 		for _, s := range strings.Split(preload, ".") {
