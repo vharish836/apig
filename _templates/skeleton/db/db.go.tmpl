@@ -7,6 +7,8 @@ import (
 	{{ end -}}
 	"strings"
 
+	"{{ .ImportDir }}/models"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/{{ .Database }}"
@@ -36,6 +38,10 @@ func Connect(dbURL string, am bool) *gorm.DB {
 
 	if gin.IsDebugging() {
 		db.LogMode(true)
+	}
+
+	if am {
+		models.AutoMigrate(db)
 	}
 
 	return db

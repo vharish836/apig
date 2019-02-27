@@ -8,11 +8,11 @@ import (
 // Commands ...
 func Commands(meta *command.Meta) map[string]cli.CommandFactory {
 	return map[string]cli.CommandFactory{
-		"gen": func() (cli.Command, error) {
-			return &command.GenCommand{
-				Meta: *meta,
-			}, nil
-		},
+		// "gen": func() (cli.Command, error) {
+		// 	return &command.GenCommand{
+		// 		Meta: *meta,
+		// 	}, nil
+		// },
 		"new": func() (cli.Command, error) {
 			return &command.NewCommand{
 				Meta: *meta,
