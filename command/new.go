@@ -13,6 +13,7 @@ import (
 const (
 	defaultDatabase = "sqlite"
 	defaultVCS      = "github.com"
+	defaultNamespace = "api"
 )
 
 // NewCommand ...
@@ -40,8 +41,8 @@ func (c *NewCommand) parseArgs(args []string) error {
 
 	flag.StringVar(&c.module, "m", "", "Module name")
 	flag.StringVar(&c.module, "module", "", "Module name")
-	flag.StringVar(&c.namespace, "n", "", "Namespace of API")
-	flag.StringVar(&c.namespace, "namespace", "", "Namespace of API")
+	flag.StringVar(&c.namespace, "n", defaultNamespace, "Namespace of API")
+	flag.StringVar(&c.namespace, "namespace", defaultNamespace, "Namespace of API")
 	flag.StringVar(&c.database, "d", defaultDatabase, "Database engine [sqlite,postgres,mysql]")
 	flag.StringVar(&c.database, "database", defaultDatabase, "Database engine [sqlite,postgres,mysql]")
 
@@ -77,7 +78,7 @@ Usage: apig new [options] PROJECTNAME
 
 Options:
   -database=database, -d     Database engine [sqlite,postgres,mysql] (default: sqlite)
-  -namespace=namepace, -n    Namespace of API (default: "" (blank string))
+  -namespace=namepace, -n    Namespace of API (default: api)
   -module=name               Module name to use (default: "" (blank string))
 `
 	return strings.TrimSpace(helpText)
