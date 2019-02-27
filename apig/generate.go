@@ -219,7 +219,7 @@ func generateApibModel(detail *Detail, outDir string) error {
 		return err
 	}
 
-	dstPath := filepath.Join(outDir, "docs", snaker.CamelToSnake(detail.Model.Name)+".apib")
+	dstPath := filepath.Join(outDir, "docs", strings.ToLower(detail.Model.Name)+".apib")
 
 	if !util.FileExists(filepath.Dir(dstPath)) {
 		if err := util.Mkdir(filepath.Dir(dstPath)); err != nil {
@@ -261,7 +261,7 @@ func generateController(detail *Detail, outDir string) error {
 		return err
 	}
 
-	dstPath := filepath.Join(outDir, "controllers", snaker.CamelToSnake(detail.Model.Name)+".go")
+	dstPath := filepath.Join(outDir, "controllers", strings.ToLower(detail.Model.Name)+".go")
 
 	if !util.FileExists(filepath.Dir(dstPath)) {
 		if err := util.Mkdir(filepath.Dir(dstPath)); err != nil {

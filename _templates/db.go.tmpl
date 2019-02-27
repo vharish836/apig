@@ -42,9 +42,7 @@ func Connect(dbURL string, am bool) *gorm.DB {
 	}
 
 	if am {
-		db.AutoMigrate({{ range .Models }}
-			&models.{{ .Name }}{},{{ end }}
-		)
+		models.AutoMigrate(db)
 	}
 
 	return db

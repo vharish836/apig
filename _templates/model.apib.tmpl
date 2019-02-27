@@ -1,7 +1,7 @@
 # Group {{ pluralize .Model.Name }}
 Welcome to the {{ pluralize (toOriginalCase .Model.Name) }} API. This API provides access to the {{ pluralize (toOriginalCase .Model.Name) }} service.
 
-## {{ pluralize (toOriginalCase .Model.Name) }} [/{{ pluralize (toSnakeCase .Model.Name) }}]
+## {{ pluralize (toOriginalCase .Model.Name) }} [/{{ pluralize (toLower .Model.Name) }}]
 
 ### Create {{ toOriginalCase .Model.Name }} [POST]
 
@@ -16,7 +16,7 @@ Create a new {{ toOriginalCase .Model.Name }}
         + {{ .JSONName }}{{ if (apibDefaultValue .) ne "" }}: {{ apibDefaultValue . }}{{ end }} ({{ apibType . }}){{ end }}
 
 + Response 201 (application/json; charset=utf-8)
-    + Attributes ({{ toSnakeCase .Model.Name }}, fixed)
+    + Attributes ({{ toLower .Model.Name }}, fixed)
 
 ### Get {{ pluralize (toOriginalCase .Model.Name) }} [GET]
 
@@ -29,9 +29,9 @@ Returns {{ article (toOriginalCase .Model.Name) }} list.
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (array, fixed)
-        + ({{ toSnakeCase .Model.Name }})
+        + ({{ toLower .Model.Name }})
 
-## {{ toOriginalCase .Model.Name }} details [/{{ pluralize (toSnakeCase .Model.Name) }}/{id}]
+## {{ toOriginalCase .Model.Name }} details [/{{ pluralize (toLower .Model.Name) }}/{id}]
 
 + Parameters
     + id: `1` (enum[string]) - The ID of the desired {{ toOriginalCase .Model.Name }}.
@@ -50,13 +50,13 @@ Returns {{ article (toOriginalCase .Model.Name) }}.
             Accept: application/json
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes ({{ toSnakeCase .Model.Name }}, fixed)
+    + Attributes ({{ toLower .Model.Name }}, fixed)
 
 ### Update {{ toOriginalCase .Model.Name }} [PUT]
 
 Update {{ article (toOriginalCase .Model.Name) }}.
 
-+ Request {{ toSnakeCase .Model.Name }} (application/json; charset=utf-8)
++ Request {{ toLower .Model.Name }} (application/json; charset=utf-8)
     + Headers
 
             Accept: application/json
@@ -65,7 +65,7 @@ Update {{ article (toOriginalCase .Model.Name) }}.
         + {{ .JSONName }}{{ if (apibDefaultValue .) ne "" }}: {{ apibDefaultValue . }}{{ end }} ({{ apibType . }}){{ end }}
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes ({{ toSnakeCase .Model.Name }}, fixed)
+    + Attributes ({{ toLower .Model.Name }}, fixed)
 
 ### Delete {{ toOriginalCase .Model.Name }} [DELETE]
 
@@ -79,6 +79,6 @@ Delete {{ article (toOriginalCase .Model.Name) }}.
 + Response 204
 
 # Data Structures
-## {{ toSnakeCase .Model.Name }} (object)
+## {{ toLower .Model.Name }} (object)
 {{ range $key, $value := .Model.Fields }}
 + {{ .JSONName }}{{ if (apibDefaultValue .) ne "" }}: {{ apibExampleValue (apibDefaultValue .) }}{{ end }} ({{ apibType . }}){{ end }}
